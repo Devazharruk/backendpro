@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <form id="noteForm" method="post" action="/create">
+        <div class="mb-4">
+          <input
+            name="title"
+            placeholder="Title"
+            type="text"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <input
+            name="note"
+            placeholder="Note"
+            type="text"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="text-right">
+          <button
+            type="submit"
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="createNoteBtn"
+          >
+            Create Note
+          </button>
+        </div>
+      </form>
+      <div class="notes mt-6 h-[50vh] overflow-scroll hide-scrollbar">
+        <% if (files.length > 0) { %> <% files.forEach((value) => { %>
+        <div
+          class="bg-slate-200 p-3 rounded m-3 flex justify-center items-center flex-col"
+        >
+          <h4 class="note-title text-4xl font-semibold "><%= value %></h4>
+
+          <a href="/file/<%= value %>">Read More</a>
+          <a href="/delete/<%= value %>">Delete</a>
+          <a href="/edit/<%= value %>">Edit</a>
+        </div>
+        <% }) %> <% } else { %>
+        <h1 class="text-gray-500 text-center">No Notes Yet</h1>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
